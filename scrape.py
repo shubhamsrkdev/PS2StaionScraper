@@ -1,24 +1,21 @@
 import csv
-import requests
+import xlwt
 from bs4 import BeautifulSoup
 from webbot import Browser
-import xlwt
 from tempfile import TemporaryFile
 
 url = 'http://psd.bits-pilani.ac.in/Login.aspx'
-
 web = Browser()
 web.go_to(url)
-
 web.type('PUT YOUR EMAIL HERE' , into = 'Username' , id = 'TxtEmail' )
 web.type('PUT YOUR PASSWORD HERE', into = 'Password', id = 'txtPass')
-
 web.click(id = 'Button1') ; 
+
 url2 ='http://psd.bits-pilani.ac.in/Student/ViewActiveStationProblemBankData.aspx'
 web.go_to(url2)
-
 html = web.get_page_source()
 soup = BeautifulSoup(html)
+
 Stations = soup.find_all(id="stationname")
 Locations = soup.find_all(id="lOCATION")
 Domain = soup.find_all(id="Industry")
